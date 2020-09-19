@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 8081
 
 const { development } = require('./config/config.json')
 const mysql = require('mysql')
-
+const { Sequelize } = require('sequelize');
 //MySql
 const connection = mysql.createConnection({
     host: `${development.host}`,
