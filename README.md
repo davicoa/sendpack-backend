@@ -10,7 +10,6 @@ yarn add body-parser
 yarn add sequelize
 yarn add cors
 
-
 yarn add mysql2
 npx sequelize-cli init
 npx sequelize-cli model:generate --name Users --attributes name:string,last_name:string,email:string,password:string
@@ -29,3 +28,7 @@ npx sequelize-cli model:generate --name final_address --attributes city:string,s
 npx sequelize-cli model:generate --name transport --attributes size:integer,price:integer
 
 npx sequelize-cli model:generate --name service --attributes name:integer,price:integer
+
+yarn add bcrypt-nodejs
+yarn add express-validator
+yarn add jwt-simple

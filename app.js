@@ -1,9 +1,10 @@
 const express = require('express')
-
 const bodyParser = require('body-parser')
-
 const app = express()
 
+require('./db')
+
+const apiRouter = require('./routes/api')
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
@@ -18,8 +19,6 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 //Route basic
-app.get('/', (req, res) => {
-    res.send('Welcome to API!')
-})
+app.use('/api', apiRouter)
 
 module.exports = app
