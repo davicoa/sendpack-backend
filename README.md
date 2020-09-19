@@ -1,14 +1,14 @@
+yarn init
+yarn install
+
 ////mysql
 yarn add express
-yarn add mysql2
+yarn add mysql
 yarn add nodemon
 yarn add body-parser
 
 yarn add sequelize
 yarn add cors
-
-
-
 
 
 yarn add mysql2
