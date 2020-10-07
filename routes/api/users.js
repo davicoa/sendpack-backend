@@ -53,6 +53,7 @@ const createToken = (user) => {
 
 
 router.get('/', async (req, res) => {
+    //console.log(req.usuarioId);
     const users = await User.findAll()
     res.json(users)
 })
