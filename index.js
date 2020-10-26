@@ -1,6 +1,6 @@
 const app = require("./app")
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 5000
 
 const { development } = require('./config/config.json')
 const mysql = require('mysql')

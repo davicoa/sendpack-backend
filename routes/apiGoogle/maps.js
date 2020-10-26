@@ -8,6 +8,10 @@ router.use(function(req, res, next) {
   next();
 });
 
+router.get('/get',async(req,res)=>{
+  return res.status(422).json({ errores: 'hola' })
+});
+
 router.get('/getRoute',async(req,res)=>{
   //console.log('req ====>', req);
     const params = req.url.split('?')[1].split('&');
