@@ -345,11 +345,10 @@ export default function LandingPage(props) {
   };
 
   const getAllRoutes = async (from, to, wayPointId) => {
-    console.log('===================== api ===============================================');
     let data = "";
     try {
       data = await fetch(
-        `http://sendpack.com.ar/api/maps/getRoute?source=${from}&destination=${to}`
+        `https://sendpack.com.ar/api/maps/getRoute?source=${from}&destination=${to}`
       );
       data = await data.text().then((data) => JSON.parse(data));
     } catch (error) {
