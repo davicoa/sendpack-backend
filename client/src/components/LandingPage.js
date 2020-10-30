@@ -17,38 +17,63 @@ import divisor from "../assets/divisor.svg";
 import TextField from "@material-ui/core/TextField";
 import backgroundCel from "../assets/backgroundCel.svg";
 import Radio from "@material-ui/core/Radio";
-import infoBackground from "../assets/infoBackground.svg";
+import infoBackground from "../assets/infoBackground.jpeg";
+import headerBackground from "../assets/headerBackground.jpeg";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import LocationSearchFrom from "../components/ui/locationSearchFrom";
 import LocationSearchTo from "../components/ui/locationSearchTo";
 import { v4 as uuid } from "uuid";
+import { ReactComponent as Cotizar } from '../assets/recursos/cotizar.svg';
+import "../components/ui/imagenCotizar.css";
+
 
 const useStyles = makeStyles((theme) => ({
+  tituloHeader: {
+    fontSize: "3em",
+    fontWeight: "900"
+  },
   backgroundCel: {
     position: "absolute",
-    backgroundImage: `url(${backgroundCel})`,
+    
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     height: "32em",
     width: "45em",
-    marginTop: "-7em",
+    marginTop: "-17em",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
+  imagenCotizar: {
+    position: "absolute",
+    
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "32em",
+    width: "45em",
+   
     [theme.breakpoints.down("xs")]: {
       display: "none",
     },
   },
 
   botonCotizar: {
-    backgroundColor: "#8EC3C7",
+    backgroundColor: "#D34D4C",
     color: "white",
     borderRadius: 50,
     height: 45,
     width: 145,
     marginRight: 40,
+    transitionDuration: ".5s",
+    transitionProperty: "background,transform",
+    transitionTimingFunction: "cubic-bezier(.33,.19,.3,.85)",
     "&:hover": {
-      backgroundColor: "#D34D4C",
+      backgroundColor: "#8EC3C7",
       border: "none",
       opacity: 1,
+      transform: "rotate(-30deg)",
     },
   },
   buttonContainer: {
@@ -62,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Roboto",
     fontWeight: "bold",
     fontSize: "0.9rem",
+    transitionDuration: ".5s",
     height: 45,
     width: 180,
     "&:hover": {
@@ -199,10 +225,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "5em",
     marginTop: "1em",
     marginBottom: "1em",
+    fontFamily: "Roboto",
+    fontSize: "1.5em",
     
   },
   formLin3: {
-    marginLeft: "4.3em",
     
   },
   formLin4: {
@@ -214,16 +241,31 @@ const useStyles = makeStyles((theme) => ({
   formLin5: {
     marginLeft: "10em",
     marginTop: "1em",
-    marginBottom: "1em",
+    marginBottom: "2em",
+  },
+  headerBackground: {
+    backgroundImage: `url(${headerBackground})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "90%",
+    width: "100%",
+    marginTop: "-5em",
+    [theme.breakpoints.down("sm")]: {
+      backgroundImage: "none",
+    },
   },
   infoBackground: {
     backgroundImage: `url(${infoBackground})`,
     backgroundPosition: "center",
-    backgroundSize: "cover",
+    backgroundColor: "#8ec3c7",
     backgroundRepeat: "no-repeat",
-    height: "100%",
+    height: "90%",
     width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      backgroundImage: "none",
+    },
   },
+ 
   CodigoPostal1: {
     marginLeft: "15em",
     marginTop: "-3.05em"
@@ -231,7 +273,10 @@ const useStyles = makeStyles((theme) => ({
   codigoPostal2: {
     marginLeft: "15em",
     marginTop: "-3.01em"
-  }
+  },
+  
+
+  
 }));
 
 export default function LandingPage(props) {
@@ -348,7 +393,7 @@ export default function LandingPage(props) {
     let data = "";
     try {
       data = await fetch(
-        `https://sendpack.com.ar/api/maps/getRoute?source=${from}&destination=${to}`
+        `http://localhost:3001/api/maps/getRoute?source=${from}&destination=${to}`
       );
       data = await data.text().then((data) => JSON.parse(data));
     } catch (error) {
@@ -374,26 +419,28 @@ export default function LandingPage(props) {
           justify="flex-end"
           alignItems="center"
           direction="row"
+          className={classes.headerBackground}
         >
           <Grid sm item className={classes.heroTextContainer}>
-            <Typography variant="h2" align="center" style={{ marginTop: matchesSM ? "1.5em" : "inherit" }}>
-              Transporte y Logística
+            <Typography className={classes.tituloHeader} variant="h2" align="center" style={{ marginTop: matchesSM ? "3em" : "1em",  marginLeft: matchesSM ? "1em" : "6em", }}>
+              TRANSPORTE Y LOGÍSTICA
               <br />
               
             </Typography>
 
             <Grid item container className={classes.formLin2}>
-              <Grid item direction="row" style={{ marginLeft: matchesSM ? "20em" : "inherit", marginTop: matchesSM ? "1.5em" : "inherit"  }}>
-                <Typography variant="p" align="center">
-                  Cotizar
+              <Grid item direction="row" style={{ marginLeft: matchesSM ? "10em" : "20em", marginTop: matchesSM ? "1.5em" : "1em", fontWeight: 900 }}>
+                <Typography variant="p" align="center"  style={{color: matchesSM ? "#8EC3C7" : "white"}}>
+                  COTIZAR
                 </Typography>
               </Grid>
             </Grid>
             <Grid item container className={classes.formLin3}>
-              <Grid item direction="row" style={{ marginLeft: matchesSM ? "14em" : "inherit" }}>
+              <Grid item direction="row" style={{ marginLeft: matchesSM ? "16em" : "31em", marginTop: "1.3em", fontFamily: "Roboto", fontWeight: 900, color: matchesSM ? "#8EC3C7" : "white"  }}>
                 <Radio
                   checked={datosEnvio.envioPaquete === true}
                   name="envioPaquete"
+                  
                   inputProps={{ "aria-label": "C" }}
                   onChange={(event) => setDatosEnvio(
                     {...datosEnvio,
@@ -416,11 +463,12 @@ export default function LandingPage(props) {
             <Grid item container className={classes.formLin1} >
               <Grid item direction="row" justify="center"
                   alignItems="center"
-                  style={{ marginLeft: matchesSM ? "7.5em" : "inherit" }}
+                  style={{ marginLeft: matchesSM ? "7.5em" : "22em" }}
                   >
                     
               
                 <LocationSearchFrom
+                style={{color: "white"}}
                   className={classes.origenF}
                   handleFromChange={handleFromChange}
                   handleFromSelect={handleFromSelect}
@@ -447,7 +495,7 @@ export default function LandingPage(props) {
                 />
                 
                 <LocationSearchTo
-                className={classes.origenF}
+                className={classes.destinoF}
                   handleToChange={handleToChange}
                   handleToSelect={handleToSelect}
                   wayPoints={wayPointsState}
@@ -472,14 +520,14 @@ export default function LandingPage(props) {
               </Grid>
             </Grid>
             <Grid item container className={classes.formLin2}>
-              <Grid item direction="row" style={{ marginLeft: matchesSM ? "20em" : "inherit", marginTop: matchesSM ? "1.5em" : "inherit"  }}>
-                <Typography variant="p" align="center">
-                  Pago en
+              <Grid item direction="row" style={{ marginLeft: matchesSM ? "10em" : "20em", marginTop: matchesSM ? "1.5em" : "inherit", fontFamily: "Roboto", fontWeight: 900  }}>
+                <Typography variant="p" align="center" style={{color: matchesSM ? "#8EC3C7" : "white"}}>
+                  PAGO EN
                 </Typography>
               </Grid>
             </Grid>
             <Grid item container className={classes.formLin3}>
-              <Grid item direction="row" style={{ marginLeft: matchesSM ? "16.5em" : "inherit" }}>
+            <Grid item direction="row" style={{ marginLeft: matchesSM ? "19em" : "34em", marginTop: "1.3em", fontFamily: "Roboto", fontWeight: 900, color: matchesSM ? "#8EC3C7" : "white"  }}>
                 <Radio
                   checked={datosEnvio.pagoOrigen === true}
                   name="pagoOrigen"
@@ -503,7 +551,7 @@ export default function LandingPage(props) {
               </Grid>
             </Grid>
             <Grid item container className={classes.formLin4}>
-              <Grid item direction="row" style={{ marginLeft: matchesSM ? "5em" : "inherit" }}>
+              <Grid item direction="row" style={{ marginLeft: matchesSM ? "5em" : "19em" }}>
                 <TextField
                   label="Cantidad de bultos"
                   id="cantBultos"
@@ -540,7 +588,7 @@ export default function LandingPage(props) {
                   justify="center"
                   className={classes.buttonContainer}
                 >
-                  <Grid item direction="row" style={{ marginLeft: matchesSM ? "5em" : "inherit",marginTop: matchesSM ? "2em" : "inherit"  }}>
+                  <Grid item direction="row" style={{ marginLeft: matchesSM ? "5em" : "17.5em",marginTop: matchesSM ? "2em" : "inherit"  }}>
                     <Button
                       component={Link}
                       to={{
@@ -575,8 +623,11 @@ export default function LandingPage(props) {
                   item
                   container
                   className={classes.backgroundCel}
-                  lg
-                ></Grid>
+                 
+                >
+                  <Cotizar className={classes.imagenCotizar}/>
+
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -595,7 +646,7 @@ export default function LandingPage(props) {
             item
             style={{
               marginLeft: matchesSM ? 0 : "5em",
-              marginTop: matchesSM ? "-5em" : "inherit",
+              marginTop: matchesSM ? "-5em" : "0em",
               textAlign: matchesSM ? "center" : undefined,
             }}
           >
@@ -610,7 +661,7 @@ export default function LandingPage(props) {
               component={Link}
               to="/"
               variant="outlined"
-              style={{marginTop: matchesSM ? "2em" : "inherit"}}
+              style={{marginTop: matchesSM ? "2em" : "2em"}}
               className={classes.botonLeerMas}
             >
               <span style={{ marginRight: 10 }}>Leer más</span>
@@ -621,7 +672,7 @@ export default function LandingPage(props) {
               className={classes.icon}
               alt="custom software icon"
               src={customSoftwareIcon}
-              style={{marginTop: matchesSM ? "2em" : "inherit"}}
+              style={{marginTop: matchesSM ? "2em" : "2em"}}
             />
           </Grid>
         </Grid>
@@ -638,7 +689,7 @@ export default function LandingPage(props) {
           <Grid
             item
             style={{
-              marginTop: matchesSM ? "-12em" : "inherit",
+              marginTop: matchesSM ? "-12em" : "0em",
               textAlign: matchesSM ? "center" : undefined,
             }}
           >
@@ -656,7 +707,7 @@ export default function LandingPage(props) {
               to="/"
               variant="outlined"
               className={classes.botonLeerMas}
-              style={{marginTop: matchesSM ? "2em" : "inherit"}}
+              style={{marginTop: matchesSM ? "2em" : "2em"}}
             >
               <span style={{ marginRight: 10 }}>Leer más</span>
             </Button>
@@ -701,7 +752,7 @@ export default function LandingPage(props) {
               to="/"
               variant="outlined"
               className={classes.botonLeerMas}
-              style={{marginTop: matchesSM ? "2em" : "inherit"}}
+              style={{marginTop: matchesSM ? "2em" : "2em"}}
             >
               <span style={{ marginRight: 10 }}>Leer más</span>
             </Button>
@@ -728,14 +779,17 @@ export default function LandingPage(props) {
             Preguntas Frecuentes
           </Typography>
           <Grid item>
-            <img className={classes.divisor} alt="Divisor" src={divisor} />
+            <img 
+              className={classes.divisor} 
+              alt="Divisor" src={divisor} 
+              style={{marginTop: matchesSM ? "2em" : "2em", marginLeft: matchesSM ? "22em" : "55em" }} />
           </Grid>
         </Grid>
         <Grid
           container
           alignItems="center"
           justify="center"
-          style={{ height: "60em" }}
+          style={{ height: "60em", marginTop: matchesSM ? "2em" : "-7em" }}
         >
           <Grid item className={[classes.preguntasCard, classes.gridItem]}>
             <Grid container direction="column" spacing={2}>
@@ -822,7 +876,7 @@ export default function LandingPage(props) {
             container 
             alignItems="center" 
             justify="center"
-            style={{marginTop: matchesSM ? "5em" : "inherit"}}
+            style={{marginTop: matchesSM ? "5em" : "-8em", marginBottom: matchesSM ? "1em" : "11em"}}
             >
             <Button
               variant="outlined"
@@ -837,7 +891,7 @@ export default function LandingPage(props) {
         {/*---Contenedor de Información---*/}
         <Grid
           container
-          style={{ height: "30em" }}
+          style={{ height: "50em" }}
           alignItems="center"
           direction="row"
           className={classes.infoBackground}
@@ -903,6 +957,8 @@ export default function LandingPage(props) {
           </Grid>
         </Grid>
       </Grid>
+      
     </Grid>
+    
   );
 }

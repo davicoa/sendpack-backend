@@ -50,10 +50,10 @@ class locationSearchFrom extends React.Component {
                      borderLeft: "none",
                      borderRight: "none",
                      marginTop: "3em",
-                     
+                     background: "none"
                     }}
                     {...getInputProps({
-                      placeholder: "Origen",
+                      placeholder: "ORIGEN",
                       className: "location-search-input Map-Input",
                       
                     })}
@@ -66,8 +66,8 @@ class locationSearchFrom extends React.Component {
                         : "suggestion-item";
                       // inline style for demonstration purpose
                       const style = suggestion.active
-                        ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                        : { backgroundColor: "#ffffff", cursor: "pointer" };
+                        ? { backgroundColor: "none", cursor: "pointer" }
+                        : { backgroundColor: "none", cursor: "pointer" };
                       return (
                         <div
                           style={{ backgroundColor: "#6855er34" }}

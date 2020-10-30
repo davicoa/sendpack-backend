@@ -45,22 +45,24 @@ class locationSearchFrom extends React.Component {
                     borderLeft: "none",
                     borderRight: "none",
                     marginTop: "2.5em",
+                    background: "none",
+                    fontFamily: "Roboto"
                   }}
                   {...getInputProps({
-                    placeholder: "Destino",
+                    placeholder: "DESTINO",
                     className: "location-search-input Map-Input",
                   })}
                 />
                 <div className="autocomplete-dropdown-container">
-                  {loading && <div>Loading...</div>}
+                  {loading && <div>Cargando...</div>}
                   {suggestions.map((suggestion) => {
                     const className = suggestion.active
                       ? "suggestion-item--active"
                       : "suggestion-item";
                     // inline style for demonstration purpose
                     const style = suggestion.active
-                      ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                      : { backgroundColor: "#ffffff", cursor: "pointer" };
+                      ? { backgroundColor: "none", cursor: "pointer" }
+                      : { backgroundColor: "none", cursor: "pointer" };
                     return (
                       <div
                         style={{ backgroundColor: "#6855er34" }}

@@ -227,7 +227,7 @@ export default function Header(props) {
                 </Tabs>
                 <Button 
                     component={Link}
-                    to="/reglog" 
+                    to="/login" 
                     variant="contained" 
                     color="#D34D4C" 
                     className={classes.button}

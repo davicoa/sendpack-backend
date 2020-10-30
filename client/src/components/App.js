@@ -10,6 +10,7 @@ import Contacto from './ui/Contacto';
 import Calculadora from './screen/Calcauladora'
 import CalculadoraMudanza from './ui/CalculadoraMudanza';
 import LoginTab from './ui/LoginTab';
+import Registro from './ui/Registro';
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -87,6 +88,17 @@ function App() {
               />
             )} 
              />
+              <Route
+           exact path="/registro" 
+           render={props => (
+            <Registro
+              {...props}
+              setValue={setValue}
+              setSelectedIndex={setSelectedIndex}
+              />
+            )} 
+             />
+             
           <Route exact path="/reglog" component={() => <div>Ingresar/Login</div>} />
         </Switch>
         <Footer value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />

@@ -334,15 +334,8 @@ export default function Calcauladora(props) {
       
       
     </List>
-      </Grid>
-      <Grid item xs={matchesSM ? 12 : 6}>
-        <MileageMap
-          wayPoints={wayPointsState}
-          labels={labels}
-          travelMode="DRIVING"
-        />
-      </Grid>
-      <Grid 
+
+    <Grid 
         item 
         container
         direction={matchesSM ? "column-reverse" : "row"}
@@ -368,6 +361,15 @@ export default function Calcauladora(props) {
             CONTINUAR
           </Button>
       </Grid>
+      </Grid>
+      <Grid item xs={matchesSM ? 12 : 6}>
+        <MileageMap
+          wayPoints={wayPointsState}
+          labels={labels}
+          travelMode="DRIVING"
+        />
+      </Grid>
+      
     </Grid>
   );
 }
