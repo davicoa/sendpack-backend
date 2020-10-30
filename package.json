@@ -21,6 +21,7 @@
     "sequelize": "^6.3.5"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "cd client && npm build"
   }
 }
